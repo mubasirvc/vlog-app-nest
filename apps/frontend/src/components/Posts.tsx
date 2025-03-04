@@ -1,12 +1,12 @@
 
 import { Post } from "@/lib/types/modelTypes";
 import PostCard from "./PostCard";
-// import Pagination from "./pagination";
+import Pagination from "./Pagination";
 
 type Props = {
   posts: Post[];
-  // currentPage: number;
-  // totalPages: number;
+  currentPage: number;
+  totalPages: number;
 };
 const Posts = async (props: Props) => {
   return (
@@ -20,11 +20,11 @@ const Posts = async (props: Props) => {
           <PostCard key={post.id} {...post} />
         ))}
       </div>
-      {/* <Pagination
+      <Pagination
         className="mt-4"
         currentPage={props.currentPage}
         totalPages={props.totalPages}
-      /> */}
+      />
     </section>
   );
 };

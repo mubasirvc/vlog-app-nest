@@ -9,7 +9,19 @@ export class PostService {
     return await this.prisma.post.findMany({ skip, take });
   }
 
-  async count(){
-    return await this.prisma.post.count()
+  async count() {
+    return await this.prisma.post.count();
+  }
+
+  async findOne(id: number) {
+    return await this.prisma.post.findFirst({
+      where: {
+        id,
+      },
+      include: {
+        author: true,
+        tags: true,
+      },
+    });
   }
 }
