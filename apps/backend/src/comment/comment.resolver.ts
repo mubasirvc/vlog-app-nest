@@ -10,7 +10,7 @@ export class CommentResolver {
   constructor(private readonly commentService: CommentService) {}
 
   @Query(() => [CommentEntity])
-  getPostComment(
+  getPostComments(
     @Args('postId', { type: () => Int! }) postId: number,
     @Args('take', {
       type: () => Int!,

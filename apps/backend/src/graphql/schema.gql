@@ -17,7 +17,7 @@ type CommentEntity {
   content: String!
   post: Post!
   author: User!
-  createAt: DateTime!
+  createdAt: DateTime!
 }
 
 """
@@ -56,7 +56,8 @@ type Query {
   posts(skip: Float, take: Float): [Post!]!
   postCount: Int!
   getPostById(id: Int!): Post!
-  getPostComment(postId: Int!, take: Int = 12, skip: Int = 0): [CommentEntity!]!
+  getPostComments(postId: Int!, take: Int = 12, skip: Int = 0): [CommentEntity!]!
+  postCommentCount(postId: Int!): Int!
 }
 
 type Mutation {
