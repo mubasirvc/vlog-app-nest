@@ -7,12 +7,16 @@ import { useState } from "react";
 import CommentCard from "./CommentCard";
 import CommentCardSkeleton from "./CommentCardSkeleton";
 import CommentPagination from "./CommentPagination";
+import { SessionUser } from "@/lib/session";
+import AddComment from "./AddComment";
 
 
 type Props = {
   postId: number;
+  user?: SessionUser
 };
-const Comments = ({ postId }: Props) => {
+
+const Comments = ({ postId, user }: Props) => {
   const [page, setPage] = useState(1);
 
   const { data, isLoading, refetch } = useQuery({
@@ -31,14 +35,15 @@ const Comments = ({ postId }: Props) => {
     <div className="p-2 rounded-md shadow-md">
       <button onClick={() => refetch()}></button>
       <h6 className="text-lg text-slate-700 ">Comments</h6>
+      {!!user && <AddComment refetch={refetch} user={user} postId={postId} />}
       <div className="flex flex-col gap-4">
         {isLoading
           ? Array.from({ length: 12 }).map((_, index) => (
-              <CommentCardSkeleton key={index} />
-            ))
+            <CommentCardSkeleton key={index} />
+          ))
           : data?.comments.map((comment) => (
-              <CommentCard key={comment.id} comment={comment} />
-            ))}
+            <CommentCard key={comment.id} comment={comment} />
+          ))}
       </div>
       <CommentPagination
         className="p-2"

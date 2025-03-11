@@ -54,7 +54,7 @@ export class AuthService {
 
     if (!user) throw new UnauthorizedException('User Not found!');
 
-    return { user: { id: user.id } };
+    return { id: user.id };
   }
 
   async validateGoogleUser(googleUser: CreateUserInput) {
