@@ -3,7 +3,7 @@
 import SubmitButton from "@/components/SubmitButton";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { signUp } from "@/lib/actions/auth";
+import { signUp } from "@/lib/actions/authActions";
 import { useActionState } from "react";
 
 const SignUpForm = () => {

@@ -13,7 +13,7 @@ export class LikeResolver {
 
   @UseGuards(JwtAuthGuard)
   @Mutation(() => Boolean)
-  async LikePost(
+  async likePost(
     @Context() context,
     @Args('postId', { type: () => Int }) postId: number,
   ) {
@@ -25,9 +25,24 @@ export class LikeResolver {
   @Mutation(() => Boolean)
   async unLikePost(
     @Context() context,
-    @Args('postId', { type: () => Int }) postId: number,
+    @Args('postId', { type: () => Int! }) postId: number,
   ) {
     const userId = context.req.user.id;
-    return this.unlikeService.likePost({ postId, userId });
+    return this.likeService.unLikePost({ postId, userId });
+  }
+
+  @Query(() => Int)
+  async postLikesCount(@Args('postId', { type: () => Int! }) postId: number) {
+    return this.likeService.getPostLikesCount(postId);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Query(() => Boolean)
+  async userLikedPost(
+    @Context() context,
+    @Args('postId', { type: () => Int! }) postId: number,
+  ) {
+    const userId = context.req.user.id;
+    return this.likeService.isUserLikedPost({userId, postId});
   }
 }

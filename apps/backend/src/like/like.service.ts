@@ -20,7 +20,7 @@ export class LikeService {
     }
   }
 
-  async unlikePost({ postId, userId }: { postId: number; userId: number }) {
+  async unLikePost({ postId, userId }: { postId: number; userId: number }) {
     try {
       await this.prismaService.like.delete({
         where: {
@@ -35,5 +35,23 @@ export class LikeService {
     } catch (error) {
       throw new BadRequestException('Like not found!');
     }
+  }
+
+  async getPostLikesCount(postId: number) {
+    return this.prismaService.like.count({ where: { postId } });
+  }
+
+  async isUserLikedPost({
+    userId,
+    postId,
+  }: {
+    userId: number;
+    postId: number;
+  }) {
+    const isLiked = await this.prismaService.like.findFirst({
+      where: { postId, userId },
+    });
+
+    return !!isLiked
   }
 }

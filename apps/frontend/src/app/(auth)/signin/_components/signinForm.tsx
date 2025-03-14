@@ -3,7 +3,7 @@
 import SubmitButton from "@/components/SubmitButton";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { signIn } from "@/lib/actions/auth";
+import { signIn } from "@/lib/actions/authActions";
 import { useActionState } from "react";
 
 const SignInForm = () => {
