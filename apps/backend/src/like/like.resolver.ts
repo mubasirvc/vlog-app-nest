@@ -1,10 +1,8 @@
-import { Resolver, Query, Mutation, Args, Int, Context } from '@nestjs/graphql';
-import { LikeService } from './like.service';
-import { Like } from './entities/like.entity';
-import { CreateLikeInput } from './dto/create-like.input';
-import { UpdateLikeInput } from './dto/update-like.input';
 import { UseGuards } from '@nestjs/common';
+import { Args, Context, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth/jwt-auth.guard';
+import { Like } from './entities/like.entity';
+import { LikeService } from './like.service';
 
 @Resolver(() => Like)
 export class LikeResolver {

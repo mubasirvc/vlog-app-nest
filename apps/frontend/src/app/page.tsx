@@ -9,7 +9,7 @@ type Props = {
 };
 
 export default async function Home({ searchParams }: Props) {
-  const page = searchParams.page ? Number(searchParams.page) : undefined;
+  const page = await searchParams.page ? Number( await searchParams.page) : undefined;
   const { posts, totalPosts } = await fetchPosts({ page });
 
   const session = await getSession()
