@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { CreatePostInput } from './dto/create-post.input';
 
 @Injectable()
 export class PostService {
@@ -55,5 +56,31 @@ export class PostService {
 
   async userPostCount(userId: number) {
     return await this.prisma.post.count({ where: { authorId: userId } });
+  }
+
+  async create({
+    createPostInput,
+    authorId,
+  }: {
+    createPostInput: CreatePostInput;
+    authorId: number;
+  }) {
+    return await this.prisma.post.create({
+      data: {
+        ...createPostInput,
+        thumbnail: createPostInput.thumbnail ?? 'null',
+        author: {
+          connect: {
+            id: authorId,
+          },
+        },
+        tags: {
+          connectOrCreate: createPostInput.tags.map((tag) => ({
+            where: { name: tag },
+            create: { name: tag },
+          })),
+        },
+      },
+    });
   }
 }
