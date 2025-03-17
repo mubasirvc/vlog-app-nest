@@ -25,7 +25,7 @@ const PostPage = async ({ params }: Props) => {
 
       <div className="relative w-80 h-60">
         <Image
-          src={post.thumbnail ?? "/no-image.png"}
+          src={post.thumbnail || "/no-image.jpg"}
           alt={post.title}
           fill
           className="rounded-md object-cover"

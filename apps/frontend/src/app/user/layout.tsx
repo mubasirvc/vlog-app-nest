@@ -1,15 +1,12 @@
-import { PropsWithChildren, ReactNode } from "react";
+import { PropsWithChildren } from "react";
 
-type Props = PropsWithChildren<{
-  modal: ReactNode;
-}>;
+type Props = PropsWithChildren;
 
-const PostsLayout = ({ children, modal }: Props) => {
+const PostsLayout = ({ children }: Props) => {
   return (
-    <>
+    <div className="mt-24 flex flex-col justify-center items-center">
       {children}
-      {modal}
-    </>
+    </div>
   );
 };
 

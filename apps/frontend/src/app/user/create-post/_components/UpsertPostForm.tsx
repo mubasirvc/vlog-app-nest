@@ -30,7 +30,7 @@ const UpsertPostForm = ({ state, formAction }: Props) => {
       action={formAction}
       className="flex flex-col gap-5 [&>div>label]:text-slate-500 [&>div>input]:transition [&>div>textarea]:transition"
     >
-      <input hidden name="postId" defaultValue={state?.data?.postId} />
+      {/* <input hidden name="postId" defaultValue={state?.data?.postId} /> */}
       <div>
         <Label htmlFor="title">Title</Label>
         <Input
@@ -96,7 +96,7 @@ const UpsertPostForm = ({ state, formAction }: Props) => {
           name="published"
           defaultChecked={state?.data?.published === "on" ? true : false}
         />
-        <Label htmlFor="published">Published Now</Label>
+        <Label htmlFor="published">Publish Now</Label>
       </div>
       {!!state?.errors?.isPublished && (
         <p className="text-red-500 animate-shake">{state.errors.isPublished}</p>
