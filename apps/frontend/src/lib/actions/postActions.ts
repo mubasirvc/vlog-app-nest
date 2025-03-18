@@ -1,12 +1,18 @@
 "use server";
 
 import { print } from "graphql";
-import { CREATE_POST_MUTATION, GET_POST_BY_ID, GET_POSTS, GET_USER_POSTS } from "../gqlQueries";
+import {
+  CREATE_POST_MUTATION,
+  GET_POST_BY_ID,
+  GET_POSTS,
+  GET_USER_POSTS,
+} from "../gqlQueries";
 import { authFetchGraphQL, fetchGraphQL } from "../fetchGraphQl";
 import { transformTakeSkip } from "../heplers";
 import { Post } from "../types/modelTypes";
 import { PostFormState } from "../types/formState";
 import { PostFormSchema } from "../zodSchemas/postFormSchema";
+import { uploadThumbnail } from "../upload";
 
 export const fetchPosts = async ({
   page,
@@ -45,7 +51,6 @@ export async function fetchUserPosts({
   };
 }
 
-
 export async function saveNewPost(
   state: PostFormState,
   formData: FormData
@@ -62,8 +67,7 @@ export async function saveNewPost(
   let thumbnailUrl = "";
 
   if (validatedFields.data.thumbnail)
-    thumbnailUrl = ""
-
+    thumbnailUrl = await uploadThumbnail(validatedFields.data.thumbnail);
 
   const data = await authFetchGraphQL(print(CREATE_POST_MUTATION), {
     input: {
