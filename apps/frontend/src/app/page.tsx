@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import Hero from "@/components/hero";
 import Posts from "@/components/Posts";
 import { fetchPosts } from "@/lib/actions/postActions";
@@ -13,7 +14,6 @@ export default async function Home({ searchParams }: Props) {
   const { posts, totalPosts } = await fetchPosts({ page });
 
   const session = await getSession()
-  console.log(session, 'session');
   
   return (
     <main>
@@ -23,6 +23,7 @@ export default async function Home({ searchParams }: Props) {
         currentPage={page ? Number(page) : 0}
         totalPages={Math.ceil(totalPosts / DEFAULT_PAGE_SIZE)}
       />
+      <Footer />
     </main>
   );
 }

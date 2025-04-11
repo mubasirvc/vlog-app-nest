@@ -41,7 +41,7 @@ const Pagination = ({
             "cursor-not-allowed": page === "...",
           })}
         >
-          {page === "..." ? "..." : <Link href={`?page=${page}`}>{page}</Link>}
+          {page === "..." ? "..." : <Link href={`?page=${page}#posts`}>{page}</Link>}
         </button>
       ))}
       

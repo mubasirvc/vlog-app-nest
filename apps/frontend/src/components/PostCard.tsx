@@ -13,9 +13,8 @@ const PostCard = ({
 }: Props) => {
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
-      <div className="relative h-60 ">
-        {/* <h1>{thumbnail}</h1> */}
-        <Image src={thumbnail || "/no-image.jpg"} alt={title ?? ""} fill />
+      <div className="relative h-60 bg-transparent">
+        <Image src={thumbnail || "/no-image.jpg"} alt={title ?? ""} fill className="object-cover" />
       </div>
       <div className="p-6 flex-grow  flex flex-col">
         <h3 className="text-lg font-bold mt-4 break-words text-center text-gray-600">
