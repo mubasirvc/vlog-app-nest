@@ -15,8 +15,8 @@ model User {
   name      String
   email     String    @unique
   bio       String?
-  avatar    String
-  password  String
+  avatar    String?
+  password  String?
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   posts     Post[]
@@ -31,6 +31,7 @@ model Post {
   content   String
   thumbnail String
   authorId  Int
+  published Boolean
   author    User      @relation(fields: [authorId], references: [id])
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
@@ -43,7 +44,7 @@ model Comment {
   id        Int      @id @default(autoincrement())
   content   String
   postId    Int
-  post      Post     @relation(fields: [postId], references: [id])
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   authorId  Int
   author    User     @relation(fields: [authorId], references: [id])
   createdAt DateTime @default(now())
@@ -61,5 +62,7 @@ model Like {
   userId Int
   postId Int
   user   User @relation(fields: [userId], references: [id])
-  post   Post @relation(fields: [postId], references: [id])
+  post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, postId])
 }
